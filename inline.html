@@ -2,10 +2,9 @@
 <html>
 <body>
 
-<p style="border: 1px solid black">Hello World</p>
-<div style="border: 1px solid black">Hello World</div>
+<p>This is an inline span <span style="border: 1px solid black">Hello World</span> element inside a paragraph.</p>
 
-<p>The P and the DIV elements are both block elements, and they will always start on a new line and take up the full width available (stretches out to the left and right as far as it can).</p>
+<p>The SPAN element is an inline element, and will not start on a new line and only takes up as much width as necessary.</p>
 
 </body>
 </html>
