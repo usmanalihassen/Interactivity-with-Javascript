@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+        }
+
+        .container {
+            background: #fff;
+            color: #333;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .container h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #6a11cb;
+        }
+
+        .container input {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .container input:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 8px rgba(106, 17, 203, 0.3);
+        }
+
+        .container button {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            font-size: 1em;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .container button:hover {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <input type="number" id="day" placeholder="Enter day (1-31)" min="1" max="31">
+        <input type="number" id="month" placeholder="Enter month (1-12)" min="1" max="12">
+        <input type="number" id="year" placeholder="Enter year" min="1900" max="2100">
+        <button onclick="calculateAge()">Calculate Age</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const day = parseInt(document.getElementById('day').value);
+            const month = parseInt(document.getElementById('month').value) - 1; // JavaScript months are 0-indexed
+            const year = parseInt(document.getElementById('year').value);
+
+            if (isNaN(day) || isNaN(month) || isNaN(year)) {
+                document.getElementById('result').innerText = "Please enter a valid date!";
+                return;
+            }
+
+            const dob = new Date(year, month, day);
+            const today = new Date();
+
+            if (dob > today) {
+                document.getElementById('result').innerText = "The date of birth cannot be in the future!";
+                return;
+            }
+
+            let age = today.getFullYear() - dob.getFullYear();
+            const m = today.getMonth() - dob.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+
+            document.getElementById('result').innerText = `Your age is ${age} years.`;
+        }
+    </script>
+</body>
+</html>
